@@ -1,0 +1,294 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(
+    90deg, 
+    rgb(197, 22, 80) 0%, 
+    rgb(18, 111, 250) 100%
+    );
+}
+
+/* TABULEIRO */
+.wrapper { 
+    height: 0.2%;
+    width: 100%;
+    bottom: 0%;
+    position: absolute;
+  background: linear-gradient(124deg, #ff2400, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3);
+  background-size: 1800% 1800%;
+  
+  -webkit-animation: rainbow 5s ease infinite;
+  -z-animation: rainbow 5s ease infinite;
+  -o-animation: rainbow 5s ease infinite;
+    animation: rainbow 5s ease infinite;}
+  
+  @-webkit-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @-moz-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @-o-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @keyframes rainbow { 
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+
+.board{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.board.x .cell:not(.x):not(.circulo):hover::after,
+.board.x .cell:not(.x):not(.circulo):hover::before
+{
+    background: rgba(131, 0, 0, 0.122) !important;   
+}
+.board.circulo .cell:not(.x):not(.circulo):hover::after,
+.board.circulo .cell:not(.x):not(.circulo):hover::before  {
+    background: rgba(0, 7, 131, 0.14) !important;
+}
+/* CELULAS */
+
+.cell{
+    width: 100px;
+    height: 100px;
+    border: 5px solid rgb(26, 26, 26);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}   
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
+    border-left: none;
+}   
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+    border-right: none;
+}   
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+    border-bottom: none;
+}   
+
+.cell.x, .cell.circulo{
+    cursor: not-allowed;
+}
+
+/* FORMA X */
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circulo):hover::after,
+.board.x .cell:not(.x):not(.circulo):hover::before{
+    content: "";
+    height: calc(100px * 0.15);
+    width: calc(100px * 0.9);
+    background: rgb(26, 26, 26);
+    position: absolute;
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.circulo):hover::before{
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.circulo):hover::after{
+    transform: rotate(-45deg);
+}
+
+
+/*FORMA CIRCULO*/
+
+.cell.circulo::before,
+.cell.circulo::after,
+.board.circulo .cell:not(.x):not(.circulo):hover::after,
+.board.circulo .cell:not(.x):not(.circulo):hover::before{
+    content: "";
+    height: calc(100px * 0.8);
+    width: calc(100px * 0.8);
+    background: rgb(26, 26, 26);
+    position: absolute;
+    border-radius: 50%;
+}
+.cell.circulo::before{
+    transform: rotate(45deg);
+}
+.cell.circulo::after{
+    transform: rotate(-45deg);
+}
+
+.mensagem-ganhar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(rgba(255,255,255,0.4),rgba(0,0,0,0.7));
+    flex-direction: column;
+}
+.botao-restart{
+    font-size: 2.5rem;
+    background-color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 10vh;
+    border:none;
+    margin-top: 16px;
+    background: linear-gradient(to right,rgba(197, 22, 80, 0.85), rgba(18, 111, 250, 0.9));
+    color: aliceblue;
+    font-family:monospace;
+}
+
+.mensagem-ganhar-texto{
+    color: aliceblue;
+    font-size: 5rem;
+}
+.botao-restart:hover{
+    color: black;
+    background: rgba(255,255,255, 0.6);
+}
+.show-mensagem-ganhar{
+    display: flex;
+}
+
+.contador-circulo{
+    width: calc(18vh*1);
+    height: calc(24vh*1);
+    display:flex;
+    justify-content: center;
+    background-color: white;
+    align-items: center;
+    position:fixed;
+    right: 10%;
+    bottom: 37%;
+    border-radius:10%;
+}
+.bloco-texto-contador-circulo{
+    align-self:flex-end;
+    font-size: large;
+    background-color: rgb(187, 187, 187);
+    width: calc(17vh*1);
+    height: calc(5vh*1);
+    border-bottom-right-radius: 2vh;
+    border-bottom-left-radius: 2vh;
+    position: absolute;
+    bottom: 2%;
+    justify-content: center;
+}
+.texto-contador-circulo{
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: 32%;
+    scale: 130%;
+    position:absolute;
+}
+
+.contador-x{
+    width: calc(18vh*1);
+    height: calc(24vh*1);
+    display:flex;
+    justify-content: center;
+    background-color: white;
+    align-items: center;
+    position:fixed;
+    left: 10%;
+    bottom: 37%;
+    border-radius:10%;
+}
+.bloco-texto-contador-x{
+    align-self:flex-end;
+    font-size: large;
+    background-color: rgb(187, 187, 187);
+    width: calc(17vh*1);
+    height: calc(5vh*1);
+    border-bottom-right-radius: 2vh;
+    border-bottom-left-radius: 2vh;
+    position:absolute;
+    bottom: 2%;
+    justify-content: center;
+}
+.texto-contador-x{ 
+    max-width: 90%;
+    max-height: 80%;
+    margin-left: 26%;
+    margin-top: 3%;
+    position: absolute;
+}
+
+.numero-contador-x{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+    align-self: center;
+    position:relative;
+    bottom: 10%;
+    font-size:calc(10*1vh);
+    color: rgb(197, 22, 80);
+}
+
+.numero-contador-circulo{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+    align-self: center;
+    position:relative;
+    bottom: 10%;
+    font-size:calc(10*1vh);  
+    color:rgb(18, 111, 250);
+}
+.botao-zerar{
+    display:flex;
+    margin:auto;
+    width: calc(6vh*1);
+    height: calc(6vh*1);
+
+    bottom: 10%;
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}   
+.botao-zerar:hover{
+   background-color: rgba(128, 128, 128, 0.4);
+   transform: rotate(-180deg);
+   cursor:grab;
+}   
+.botao-zerar:click{
+    cursor: grabbing;
+}
+.flecha {
+    transition: transform 0.3s ease-in-out;
+    scale:45%
+  }
+  

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./estilo.css">
+        <title>Jogo da Velha</title>
+    </head>
+    <body>
+        <div class="wrapper"></div>
+        <div class="board" data-board>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+        </div>
+
+        <div class="mensagem-ganhar" data-mensagem-ganhar>
+            <p class="mensagem-ganhar-texto" data-mensagem-ganhar-texto>puxar qual ganhou </p>
+            <button class="botao-restart" data-botao-restart>RESTART</button>
+        </div>
+
+        
+        <!--contador para o time do circulo-->
+        <div class="contador-circulo" data-contador-circulo>
+            <div class="numero-contador-circulo" data-numero-contador-circulo>0</div>
+            <div class="bloco-texto-contador-circulo">
+                <img src="img\blue.png" class="texto-contador-circulo">
+            </div>
+        </div>
+        
+        <!--contador para o time do X-->
+        <div class="contador-x" data-contador-x>
+            <div class="numero-contador-x" data-numero-contador-x id='numero-contador-x'>0</div>
+            <div class="bloco-texto-contador-x">
+                <img src="img\red.png" class="texto-contador-x">
+            </div>
+        </div>
+        <!--botão para zerar os pontos-->
+        <div class="botao-zerar" data-botao-zerar>
+            <img src="img/arrow.png" class="flecha">
+        </div>
+
+        <script src="./script.js"></script>
+    </body>
+    </html>
